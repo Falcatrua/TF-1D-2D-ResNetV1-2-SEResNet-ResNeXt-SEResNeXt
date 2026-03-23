@@ -18,7 +18,7 @@ def Conv_1D_Block(x, model_width, kernel, strides):
 def SE_Block(inputs, num_filters, ratio):
     squeeze = tf.keras.layers.GlobalAveragePooling1D()(inputs)
 
-    excitation = tf.keras.layers.Dense(units=num_filters/ratio)(squeeze)
+    excitation = tf.keras.layers.Dense(units=int(num_filters/ratio))(squeeze)
     excitation = tf.keras.layers.Activation('relu')(excitation)
     excitation = tf.keras.layers.Dense(units=num_filters)(excitation)
     excitation = tf.keras.layers.Activation('sigmoid')(excitation)
